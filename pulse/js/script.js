@@ -1,17 +1,18 @@
 $(document).ready(function(){
     $('.carousel__inner').slick({
-        speed: 500,
+        speed: 1200,
+        adaptiveHeight: true,
         prevArrow: '<button type="button" class="slick-prev"><img src="icons/carousel/left-arrow.png"></button>',
         nextArrow: '<button type="button" class="slick-next"><img src="icons/carousel/right-arrow.png"></button>',
         responsive: [
             {
-              breakpoint: 480, // брекпоинтов может быть сколько угодно
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+                breakpoint: 992,
+                settings: {
+                    dots: true,
+                    arrows: false
+                }
             }
-          ]
+        ]
     });
     
     $('ul.catalog__tabs').on('click', 'li:not(.catalog__tab_active)', function() {
@@ -26,7 +27,6 @@ $(document).ready(function(){
                 e.preventDefault();
                 $('.catalog-item__content').eq(i).toggleClass('catalog-item__content_active');
                 $('.catalog-item__list').eq(i).toggleClass('catalog-item__list_active');
-                $('.catalog-item__back').eq(i).toggleClass('catalog-item__back_active');
             })
         });
     };
@@ -34,42 +34,53 @@ $(document).ready(function(){
     toggleSlide('.catalog-item__link');
     toggleSlide('.catalog-item__back');
 
-    //Modal
-    $('[data-modal=consultation').on('click', function(){
+    // Modal
+
+    $('[data-modal=consultation]').on('click', function() {
         $('.overlay, #consultation').fadeIn('slow');
     });
-    $('.modal__close').on('click', function(){
-        $('.overlay, #consultation, #order, #thanks').fadeOut('slow');
+    $('.modal__close').on('click', function() {
+        $('.overlay, #consultation, #thanks, #order').fadeOut('slow');
     });
-    $('.button_mini').each(function(i){
-        $(this).on('click', function(){
+
+    $('.button_mini').each(function(i) {
+        $(this).on('click', function() {
             $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
             $('.overlay, #order').fadeIn('slow');
+        })
+    });
+
+    function validateForms(form){
+        $(form).validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: "required",
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Пожалуйста, введите свое имя",
+                    minlength: jQuery.validator.format("Введите {0} символа!")
+                  },
+                phone: "Пожалуйста, введите свой номер телефона",
+                email: {
+                  required: "Пожалуйста, введите свою почту",
+                  email: "Неправильно введен адрес почты"
+                }
+            }
         });
-    });
-    function validateForm(form){
-    $(form).validate({
-        rules: {
-            name: "required",
-            phone: "required",
-            email: {
-                required: true,
-                email: true
-            }
-        },
-        messages: {
-            name: "Пожалуйста введите Свое имя",
-            phone: "Пожалуйста введите Свой номер телефона",
-            email: {
-              required: "Пожалуйста введите Свою почту",
-              email: "Неправильно введен адресс электронной почты"
-            }
-          }
-    });
-}
-    validateForm('#consultation-form');
-    validateForm('#consultation form');
-    validateForm('#order form')
+    };
+
+    validateForms('#consultation-form');
+    validateForms('#consultation form');
+    validateForms('#order form');
+
     $('input[name=phone]').mask("+7 (999) 999-99-99");
 
     $('form').submit(function(e) {
@@ -88,20 +99,20 @@ $(document).ready(function(){
         return false;
     });
 
-    //Smooth scroll
+    // Smooth scroll and pageup
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 1600) {
-            $('.pageup').fadeIn('fast');
+            $('.pageup').fadeIn();
         } else {
             $('.pageup').fadeOut();
         }
     });
-    $("a[href^='#up']").click(function(){
+
+    $("a[href=#up]").click(function(){
         const _href = $(this).attr("href");
         $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
         return false;
     });
 
-    //Smooth scroll
 });
