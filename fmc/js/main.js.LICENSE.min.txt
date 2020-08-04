@@ -1,0 +1,37 @@
+/*!
+ * Glide.js v3.4.1
+ * (c) 2013-2019 Jędrzej Chałubek <jedrzej.chalubek@gmail.com> (http://jedrzejchalubek.com/)
+ * Released under the MIT License.
+ */
+
+/*! %modules%/carousel/carousel */
+
+/*! %modules%/header/header */
+
+/*! ./import/module */
+
+/*! @glidejs/glide */
+
+/*! exports provided: default */
+
+/*! no exports provided */
+
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+
+/*!*********************************!*\
+  !*** ./src/js/import/module.js ***!
+  \*********************************/
+
+/*!*********************************************!*\
+  !*** ./src/blocks/modules/header/header.js ***!
+  \*********************************************/
+
+/*!*************************************************!*\
+  !*** ./src/blocks/modules/carousel/carousel.js ***!
+  \*************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/@glidejs/glide/dist/glide.esm.js ***!
+  \*******************************************************/
